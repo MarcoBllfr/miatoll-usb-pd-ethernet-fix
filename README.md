@@ -130,6 +130,19 @@ then zero flaps over 5+ minutes and no Oops. Full snapshots:
 [`logs/success-state.txt`](logs/success-state.txt),
 [`logs/pd-renegotiation-ok.log`](logs/pd-renegotiation-ok.log).
 
+## What the patch does NOT fix: dumb QC charger into a PD hub
+
+Retested with the patch applied using the old Xiaomi 33W QC brick (USB-A)
++ A-to-C 18W cable into the hub's PD input: the hub brown-outs and
+power-cycles VBUS continuously (`xhci remove` within a second of each
+re-enumeration), and after ~30s of flapping the same
+`rtnl_fill_ifinfo+0x6d8` Oops fires again — this time as a NULL dereference
+instead of the earlier garbage pointer. See
+[`logs/oops-trace-old-charger-patched.log`](logs/oops-trace-old-charger-patched.log).
+No software can fix that combination: a PD hub needs a real PD supply
+(C-to-C). Two Oops instances at the identical call site make the upstream
+report below even stronger.
+
 ## Upstream follow-ups
 
 1. Send the DTS patch to `sm7125-mainline/linux` (+ pmaports) so it survives

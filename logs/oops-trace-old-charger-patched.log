@@ -1,0 +1,76 @@
+Oct 10 18:40:11 marco-redmi python3[726]: ambient=202.8 lux brightness=1783/4095
+Oct 10 18:40:12 marco-redmi python3[726]: ambient=230.1 lux brightness=1995/4095
+Oct 10 18:40:13 marco-redmi python3[726]: ambient=249.9 lux brightness=2149/4095
+Oct 10 18:40:14 marco-redmi python3[726]: ambient=263.7 lux brightness=2257/4095
+Oct 10 18:40:15 marco-redmi python3[726]: ambient=272.6 lux brightness=2326/4095
+Oct 10 18:40:16 marco-redmi python3[726]: ambient=278.4 lux brightness=2371/4095
+Oct 10 18:40:17 marco-redmi python3[726]: ambient=281.4 lux brightness=2395/4095
+Oct 10 18:40:18 marco-redmi python3[726]: ambient=283.0 lux brightness=2407/4095
+Oct 10 18:40:19 marco-redmi systemd[1]: NetworkManager-dispatcher.service: Deactivated successfully.
+Oct 10 18:40:20 marco-redmi python3[726]: ambient=283.7 lux brightness=2412/4095
+Oct 10 18:40:21 marco-redmi python3[726]: ambient=284.5 lux brightness=2418/4095
+Oct 10 18:40:22 marco-redmi python3[726]: ambient=286.7 lux brightness=2435/4095
+Oct 10 18:40:23 marco-redmi python3[726]: ambient=287.7 lux brightness=2443/4095
+Oct 10 18:40:23 marco-redmi kernel: Unable to handle kernel NULL pointer dereference at virtual address 0000000000000000
+Oct 10 18:40:23 marco-redmi kernel: Mem abort info:
+Oct 10 18:40:23 marco-redmi kernel:   ESR = 0x0000000096000004
+Oct 10 18:40:23 marco-redmi kernel:   EC = 0x25: DABT (current EL), IL = 32 bits
+Oct 10 18:40:23 marco-redmi kernel:   SET = 0, FnV = 0
+Oct 10 18:40:23 marco-redmi kernel:   EA = 0, S1PTW = 0
+Oct 10 18:40:23 marco-redmi kernel:   FSC = 0x04: level 0 translation fault
+Oct 10 18:40:23 marco-redmi kernel: Data abort info:
+Oct 10 18:40:23 marco-redmi kernel:   ISV = 0, ISS = 0x00000004, ISS2 = 0x00000000
+Oct 10 18:40:23 marco-redmi kernel:   CM = 0, WnR = 0, TnD = 0, TagAccess = 0
+Oct 10 18:40:23 marco-redmi kernel:   GCS = 0, Overlay = 0, DirtyBit = 0, Xs = 0
+Oct 10 18:40:23 marco-redmi kernel: user pgtable: 4k pages, 48-bit VAs, pgdp=000000010ff90000
+Oct 10 18:40:23 marco-redmi kernel: [0000000000000000] pgd=0000000000000000, p4d=0000000000000000
+Oct 10 18:40:23 marco-redmi kernel: Internal error: Oops: 0000000096000004 [#1] PREEMPT SMP
+Oct 10 18:40:23 marco-redmi kernel: Modules linked in: r8153_ecm cdc_ether r8152 typec_displayport exfat q6asm_dai q6afe_clocks q6routing q6afe_dai q6adm q6afe q6asm snd_q6dsp_common q6core fastrpc qrtr_smd venus_enc venus_dec drv2624 rpmsg_ctrl videobuf2_dma_contig rpmsg_char ov16a1q dw9714 s5k5e9 qcom_pd_mapper leds_qcom_lpg qcom_pbs led_class_multicolor aw8695_haptics hci_uart btqca venus_core qcom_camss btbcm v4l2_mem2mem snd_soc_sm8250 bluetooth ir_spi videobuf2_dma_sg nvmem_qcom_spmi_sdam videobuf2_memops snd_soc_qcom_sdw rc_core videobuf2_v4l2 qcom_qg v4l2_fwnode snd_soc_qcom_common videobuf2_common qcom_spmi_temp_alarm v4l2_async ecdh_generic ecc pwrseq_core videodev qcom_spmi_adc5 snd_soc_tas2562 rtc_pm8xxx qcom_stats reset_qcom_pdc mc snd_soc_lpass_tx_macro icc_bwmon i2c_qcom_cci soundwire_qcom snd_soc_lpass_rx_macro snd_soc_lpass_va_macro snd_soc_lpass_macro_common qcom_q6v5_pas ipa coresight_stm coresight_tmc qcom_pil_info coresight_replicator stm_core coresight_funnel snd_soc_wcd937x qcom_q6v5 qcom_sysmon coresight
+Oct 10 18:40:23 marco-redmi kernel:  snd_soc_wcd_classh ath10k_snoc qcom_wdt snd_soc_wcd937x_sdw qcom_common regmap_sdw qcom_glink_smem snd_soc_wcd_mbhc soundwire_bus joydev overlay nft_reject_inet nft_reject nf_reject_ipv6 nf_reject_ipv4 nft_ct nf_conntrack nf_defrag_ipv6 nf_defrag_ipv4 nf_tables zram zsmalloc nfnetlink fuse ipv6 evdev
+Oct 10 18:40:23 marco-redmi kernel: CPU: 4 UID: 0 PID: 9034 Comm: ip Not tainted 6.14.7-sm7125 #3-postmarketos-qcom-sm7125
+Oct 10 18:40:23 marco-redmi kernel: Hardware name: xiaomi  Huaxing)/ Huaxing), BIOS 2025.04-rc1-g682b7641395b 04/01/2025
+Oct 10 18:40:23 marco-redmi kernel: pstate: 80400005 (Nzcv daif +PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+Oct 10 18:40:23 marco-redmi kernel: pc : __pi_strlen+0x14/0x150
+Oct 10 18:40:23 marco-redmi kernel: lr : nla_put_string+0x28/0x58
+Oct 10 18:40:23 marco-redmi kernel: sp : ffff80008c893560
+Oct 10 18:40:23 marco-redmi kernel: x29: ffff80008c893560 x28: ffff000095b1b700 x27: ffff000084410000
+Oct 10 18:40:23 marco-redmi kernel: x26: 000000000000234a x25: 0000000000000010 x24: 00000000ffffffff
+Oct 10 18:40:23 marco-redmi kernel: x23: 0000000000000000 x22: ffff800082886c40 x21: ffff000095b1b700
+Oct 10 18:40:23 marco-redmi kernel: x20: 0000000000000038 x19: 0000000000000000 x18: 0000000000000000
+Oct 10 18:40:23 marco-redmi kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+Oct 10 18:40:23 marco-redmi kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000b44
+Oct 10 18:40:23 marco-redmi kernel: x11: 0000000000000ec0 x10: 0000000000000b44 x9 : ffff8000810f4be0
+Oct 10 18:40:23 marco-redmi kernel: x8 : 0101010101010101 x7 : 0000000000000000 x6 : 0000000000000000
+Oct 10 18:40:23 marco-redmi kernel: x5 : ffff0000878afb44 x4 : 0000000000000000 x3 : 0000000000000000
+Oct 10 18:40:23 marco-redmi kernel: x2 : 0000000000000000 x1 : 0000000000000038 x0 : 0000000000000000
+Oct 10 18:40:23 marco-redmi kernel: Call trace:
+Oct 10 18:40:23 marco-redmi kernel:  __pi_strlen+0x14/0x150 (P)
+Oct 10 18:40:23 marco-redmi kernel:  rtnl_fill_ifinfo+0x6d8/0x738
+Oct 10 18:40:23 marco-redmi kernel:  rtnl_dump_ifinfo+0x170/0x5a8
+Oct 10 18:40:23 marco-redmi kernel:  rtnl_dumpit+0x50/0xb8
+Oct 10 18:40:23 marco-redmi kernel:  netlink_dump+0x1a8/0x448
+Oct 10 18:40:23 marco-redmi kernel:  __netlink_dump_start+0x1dc/0x328
+Oct 10 18:40:23 marco-redmi kernel:  rtnetlink_rcv_msg+0x28c/0x328
+Oct 10 18:40:23 marco-redmi kernel:  netlink_rcv_skb+0x128/0x148
+Oct 10 18:40:23 marco-redmi kernel:  rtnetlink_rcv+0x24/0x38
+Oct 10 18:40:23 marco-redmi kernel:  netlink_unicast+0x270/0x420
+Oct 10 18:40:23 marco-redmi kernel:  netlink_sendmsg+0x268/0x358
+Oct 10 18:40:23 marco-redmi kernel:  __sys_sendto+0x138/0x1c8
+Oct 10 18:40:23 marco-redmi kernel:  __arm64_sys_sendto+0x34/0x50
+Oct 10 18:40:23 marco-redmi kernel:  invoke_syscall+0x48/0x100
+Oct 10 18:40:23 marco-redmi kernel:  el0_svc_common+0x88/0xe8
+Oct 10 18:40:23 marco-redmi kernel:  do_el0_svc+0x28/0x40
+Oct 10 18:40:23 marco-redmi kernel:  el0_svc+0x38/0x68
+Oct 10 18:40:23 marco-redmi kernel:  el0t_64_sync_handler+0x78/0x108
+Oct 10 18:40:23 marco-redmi kernel:  el0t_64_sync+0x198/0x1a0
+Oct 10 18:40:23 marco-redmi kernel: Code: 92402c04 b200c3e8 f13fc09f 5400088c (a9400c02) 
+Oct 10 18:40:23 marco-redmi kernel: ---[ end trace 0000000000000000 ]---
+Oct 10 18:40:24 marco-redmi python3[726]: ambient=286.6 lux brightness=2435/4095
+Oct 10 18:40:25 marco-redmi python3[726]: ambient=285.6 lux brightness=2427/4095
+Oct 10 18:40:26 marco-redmi python3[726]: ambient=285.0 lux brightness=2422/4095
+Oct 10 18:40:28 marco-redmi python3[726]: ambient=285.3 lux brightness=2425/4095
+Oct 10 18:40:29 marco-redmi python3[726]: ambient=285.6 lux brightness=2427/4095
+Oct 10 18:40:30 marco-redmi python3[726]: ambient=286.0 lux brightness=2430/4095
+Oct 10 18:40:31 marco-redmi python3[726]: ambient=288.6 lux brightness=2450/4095
+Oct 10 18:40:32 marco-redmi python3[726]: ambient=290.9 lux brightness=2469/4095
+Oct 10 18:40:33 marco-redmi python3[726]: ambient=292.1 lux brightness=2478/4095
