@@ -130,18 +130,23 @@ then zero flaps over 5+ minutes and no Oops. Full snapshots:
 [`logs/success-state.txt`](logs/success-state.txt),
 [`logs/pd-renegotiation-ok.log`](logs/pd-renegotiation-ok.log).
 
-## What the patch does NOT fix: dumb QC charger into a PD hub
+## What the patch does NOT fix: weak-marging PD supply
 
-Retested with the patch applied using the old Xiaomi 33W QC brick (USB-A)
-+ A-to-C 18W cable into the hub's PD input: the hub brown-outs and
-power-cycles VBUS continuously (`xhci remove` within a second of each
-re-enumeration), and after ~30s of flapping the same
+Retested with the patch applied using a new 20W PD charger (5V/3A, 9V/2.22A,
+12V/1.67A, USB-C output, C-to-C cable) into the hub's PD input: the hub
+brown-outs and power-cycles VBUS continuously (`xhci remove` within a second
+of each re-enumeration), and after ~30s of flapping the same
 `rtnl_fill_ifinfo+0x6d8` Oops fires again — this time as a NULL dereference
 instead of the earlier garbage pointer. See
-[`logs/oops-trace-old-charger-patched.log`](logs/oops-trace-old-charger-patched.log).
-No software can fix that combination: a PD hub needs a real PD supply
-(C-to-C). Two Oops instances at the identical call site make the upstream
-report below even stronger.
+[`logs/oops-trace-20w-pd-charger.log`](logs/oops-trace-20w-pd-charger.log).
+(Note: an earlier report blamed a QC brick + A-to-C cable here; the failing
+retest was in fact proper PD, corrected 2026-10-10.)
+The working reference stayed a higher-headroom PD charger (stable 5V/2A
+contract, 5+ min, battery 42% → 85%). Likely the 20W brick's 5V rail
+trips on the combined phone + hub + dongle inrush. Isolation tests to run:
+PD charger direct-to-phone (no hub), then hub without Ethernet, screen off
+to cut load. Two Oops instances at the identical call site make the
+upstream report below even stronger.
 
 ## Upstream follow-ups
 
