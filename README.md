@@ -142,9 +142,13 @@ instead of the earlier garbage pointer. See
 (Note: an earlier report blamed a QC brick + A-to-C cable here; the failing
 retest was in fact proper PD, corrected 2026-10-10.)
 The working reference stayed a higher-headroom PD charger (stable 5V/2A
-contract, 5+ min, battery 42% → 85%). Likely the 20W brick's 5V rail
-trips on the combined phone + hub + dongle inrush. Isolation tests to run:
-PD charger direct-to-phone (no hub), then hub without Ethernet, screen off
+contract, 5+ min, battery 42% → 85%). A swap test later exonerated the
+cable: same C-to-C cable + working charger = clean single enumeration,
+`eth0` up with DHCP, 3/3 pings. Verdict: the 20W brick's 5V rail sags
+under combined phone + hub + dongle load and the hub power-cycles.
+Isolation tests to run:
+PD charger direct-to-phone (no hub; passed: 5V/3A contract, charging),
+then hub without Ethernet, screen off
 to cut load. Two Oops instances at the identical call site make the
 upstream report below even stronger.
 
