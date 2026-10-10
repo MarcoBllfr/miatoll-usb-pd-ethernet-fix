@@ -130,27 +130,18 @@ then zero flaps over 5+ minutes and no Oops. Full snapshots:
 [`logs/success-state.txt`](logs/success-state.txt),
 [`logs/pd-renegotiation-ok.log`](logs/pd-renegotiation-ok.log).
 
-## What the patch does NOT fix: weak-marging PD supply
+## Charger matrix (all with patch applied, C-to-C unless noted)
 
-Retested with the patch applied using a new 20W PD charger (5V/3A, 9V/2.22A,
-12V/1.67A, USB-C output, C-to-C cable) into the hub's PD input: the hub
-brown-outs and power-cycles VBUS continuously (`xhci remove` within a second
-of each re-enumeration), and after ~30s of flapping the same
-`rtnl_fill_ifinfo+0x6d8` Oops fires again — this time as a NULL dereference
-instead of the earlier garbage pointer. See
-[`logs/oops-trace-20w-pd-charger.log`](logs/oops-trace-20w-pd-charger.log).
-(Note: an earlier report blamed a QC brick + A-to-C cable here; the failing
-retest was in fact proper PD, corrected 2026-10-10.)
-The working reference stayed a higher-headroom PD charger (stable 5V/2A
-contract, 5+ min, battery 42% → 85%). A swap test later exonerated the
-cable: same C-to-C cable + working charger = clean single enumeration,
-`eth0` up with DHCP, 3/3 pings. Verdict: the 20W brick's 5V rail sags
-under combined phone + hub + dongle load and the hub power-cycles.
-Isolation tests to run:
-PD charger direct-to-phone (no hub; passed: 5V/3A contract, charging),
-then hub without Ethernet, screen off
-to cut load. Two Oops instances at the identical call site make the
-upstream report below even stronger.
+| Supply | Result |
+|---|---|
+| Higher-wattage PD charger + C-to-C | Stable 5V/2A sink + host, 5+ min, battery 42% → 85% |
+| 100W laptop PD charger + C-to-C | Stable 5V/2A sink + host, `eth0` + DHCP, ping clean |
+| 20W PD (5V/3A, 9V/2.22A, 12V/1.67A) + C-to-C | Sink/source oscillation ~15s period, USB re-enumeration each cycle, then crash (reproduced, watched live) |
+| Xiaomi 33W QC brick (USB-A) + A-to-C 18W | No PD possible (no CC lines); brown-outs, flap loop, Oops |
+| No charger (battery) | Stable host, drains battery |
+
+Rule of thumb: this phone + hub + RTL8153 + display wants a 30W-class
+or better PD supply; 20W sags and the hub power-cycles VBUS.
 
 ## Upstream follow-ups
 
