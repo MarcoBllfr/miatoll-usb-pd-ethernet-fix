@@ -142,6 +142,11 @@ then zero flaps over 5+ minutes and no Oops. Full snapshots:
 
 Rule of thumb: this phone + hub + RTL8153 + display wants a 30W-class
 or better PD supply; 20W sags and the hub power-cycles VBUS.
+Update: a later retest with a Cat 6 Ethernet cable (replacing a marginal
+older cable) held the 20W brick stable — sinking 5V/2A, zero interface
+errors, no new xhci/carrier events over minutes. PHY retrains on a bad
+cable look exactly like supply flaps (error handling + USB resets + the
+same rtnetlink churn), so rule out the cable before blaming the brick.
 
 ## Operational rule: never boot with PD attached, always hot-plug
 
