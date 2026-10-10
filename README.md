@@ -143,6 +143,20 @@ then zero flaps over 5+ minutes and no Oops. Full snapshots:
 Rule of thumb: this phone + hub + RTL8153 + display wants a 30W-class
 or better PD supply; 20W sags and the hub power-cycles VBUS.
 
+## Operational rule: never boot with PD attached, always hot-plug
+
+Booting with hub + PD charger connected triggers a *different*, boot-time
+crash: NULL dereference in the `sock_ioctl` path (~12s into boot,
+`arm64_sys_ioctl` ← `invoke_syscall`, faulting insn `(f940014a)` —
+register-offset load, i.e. another freed-pointer deref during USB churn
+while drivers are still probing). Photographed on-device console;
+importantly the system survives it and keeps booting (modem, WiFi all come
+up). Same root pattern as the rtnetlink UAFs: userspace touching network
+sockets/devices mid-teardown. Three `rtnl` instances + one `ioctl`
+instance now documented (`logs/oops-trace*.log` + photo record).
+Procedure: boot with Ethernet-only (or nothing), wait for settled boot,
+*then* plug the PD charger. Hot-plug negotiation is a single clean cycle.
+
 ## Upstream follow-ups
 
 1. Send the DTS patch to `sm7125-mainline/linux` (+ pmaports) so it survives
