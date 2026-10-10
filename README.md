@@ -9,6 +9,13 @@ rebooted the phone.
 Tested on: `Xiaomi Redmi Note 9 Pro (Global, Huaxing)` = `xiaomi,joyeuse`,
 kernel `6.14.7-sm7125` (`linux-postmarketos-qcom-sm7125-6.14.7-r2`).
 
+Final verified state (2026-10-10, device access ended after this):
+patched DTB + Esiposs hub + **20W PD brick + its bundled C-to-C cable +
+old Ethernet cable** — sinking + charging, `eth0` + DHCP, zero Oops,
+single carrier, clean across reboots. The 20W saga below ended in
+"works, cause of earlier failures uncertain" — read it as a lesson in
+confounded variables, not a verdict.
+
 ## TL;DR
 
 The port's Type-C connector node is declared `power-role = "source"` in
@@ -130,23 +137,27 @@ then zero flaps over 5+ minutes and no Oops. Full snapshots:
 [`logs/success-state.txt`](logs/success-state.txt),
 [`logs/pd-renegotiation-ok.log`](logs/pd-renegotiation-ok.log).
 
-## Charger matrix (all with patch applied, C-to-C unless noted)
+## Charger/cable saga: honest version (multiple variables moved at once)
 
-| Supply | Result |
+| Supply + cables | Result |
 |---|---|
 | Higher-wattage PD charger + C-to-C | Stable 5V/2A sink + host, 5+ min, battery 42% → 85% |
 | 100W laptop PD charger + C-to-C | Stable 5V/2A sink + host, `eth0` + DHCP, ping clean |
-| 20W PD (5V/3A, 9V/2.22A, 12V/1.67A) + C-to-C | Sink/source oscillation ~15s period, USB re-enumeration each cycle, then crash (reproduced, watched live) |
+| 20W PD (5V/3A, 9V/2.22A, 12V/1.67A) + first C-to-C + old Ethernet | Sink/source oscillation ~15s, re-enumeration each cycle, then crash (watched live) |
+| 20W PD + bundled C-to-C + old Ethernet (same brick!) | Stable across reboots, sinking + charging, zero errors |
 | Xiaomi 33W QC brick (USB-A) + A-to-C 18W | No PD possible (no CC lines); brown-outs, flap loop, Oops |
 | No charger (battery) | Stable host, drains battery |
 
-Rule of thumb: this phone + hub + RTL8153 + display wants a 30W-class
-or better PD supply; 20W sags and the hub power-cycles VBUS.
-Update: a later retest with a Cat 6 Ethernet cable (replacing a marginal
-older cable) held the 20W brick stable — sinking 5V/2A, zero interface
-errors, no new xhci/carrier events over minutes. PHY retrains on a bad
-cable look exactly like supply flaps (error handling + USB resets + the
-same rtnetlink churn), so rule out the cable before blaming the brick.
+What to take from this: the 20W brick was declared guilty, then acquitted
+by its own bundled cable. The honest ranking of suspects for the bad 20W
+runs is (a) the first C-to-C cable (resistive droop at 2A), (b) battery
+charge current (high when depleted, tapered later — and the gauge readings
+without a charger driver jump around, so "42% → 85%" should not be
+over-read), (c) display/load state. These were never isolated one at a
+time, so there is no clean verdict — only the final working combination
+above, verified across reboots. Rule out cables (and check PHY error
+counters: `ethtool -S eth0 | grep -iE "err|drop|crc|miss"`) before blaming
+bricks; bring a 30W+ supply anyway for headroom.
 
 ## Operational rule: never boot with PD attached, always hot-plug
 Booting with hub + PD charger connected triggers a *different*, boot-time
@@ -174,6 +185,26 @@ dependency failures every few seconds (coredump is disabled by
 exec-condition on pmOS) and PipeWire-PulseAudio socket refusals; both are
 single-purpose session/setup units, not your network.
 
+## Phone dashboard: show LAN next to Wi-Fi
+
+`/usr/local/bin/server-dashboard.py` (curses, on tty1 via
+`server-dashboard.service`; the framebuffer variant imports its
+`collect()`, so one edit covers both) hard-codes WLAN. Added alongside:
+
+```python
+eth = run("nmcli", "-g", "GENERAL.CONNECTION", "device", "show", "eth0") or "disconnected"
+route = run("ip", "route", "show", "default")   # was: default dev wlan0
+"network": [f"Wi-Fi      {wifi}", f"WLAN IPv4  {ip4.get('wlan0', '—')}",
+            f"LAN        {eth}", f"LAN IPv4   {ip4.get('eth0', '—')}",
+            f"Gateway    {gateway.group(1) if gateway else '—'}",
+            f"USB SSH    {ip4.get('usb0', '—')}"],
+```
+
+then `sudo systemctl restart server-dashboard.service`. Fits the fixed
+panel height (6 of 8 rows). Caution when editing over SSH: this tooling
+chain mangles single-quote characters in heredocs — transfer patch scripts
+base64-encoded or write them with double quotes only.
+
 ## Upstream follow-ups
 
 1. Send the DTS patch to `sm7125-mainline/linux` (+ pmaports) so it survives
@@ -182,3 +213,7 @@ single-purpose session/setup units, not your network.
 2. The `rtnl_fill_ifinfo` UAF on surprise USB-net removal is a real (latent)
    upstream bug independent of this fix — see `logs/oops-trace.log`
    (6.14.7, `r8152` + `xhci` teardown raced with `Comm: ip` rtnetlink dump).
+
+Status 2026-10-11: device no longer accessible, repo closed out from
+session logs. The DTS patch and the UAF report are the two items worth
+upstreaming; everything else here is field notes.
