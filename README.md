@@ -149,7 +149,6 @@ cable look exactly like supply flaps (error handling + USB resets + the
 same rtnetlink churn), so rule out the cable before blaming the brick.
 
 ## Operational rule: never boot with PD attached, always hot-plug
-
 Booting with hub + PD charger connected triggers a *different*, boot-time
 crash: NULL dereference in the `sock_ioctl` path (~12s into boot,
 `arm64_sys_ioctl` ← `invoke_syscall`, faulting insn `(f940014a)` —
@@ -161,6 +160,19 @@ sockets/devices mid-teardown. Three `rtnl` instances + one `ioctl`
 instance now documented (`logs/oops-trace*.log` + photo record).
 Procedure: boot with Ethernet-only (or nothing), wait for settled boot,
 *then* plug the PD charger. Hot-plug negotiation is a single clean cycle.
+
+Also disable the boot-stalling unit (one-shot failure per boot while the
+USB NIC churns, holds up `network-online.target` behind a 60s timeout —
+this is the stuck PMOS splash frame, not a kernel hang):
+
+```sh
+sudo systemctl disable NetworkManager-wait-online.service
+```
+
+Unrelated cosmetic noise you can ignore: `systemd-coredump-register`
+dependency failures every few seconds (coredump is disabled by
+exec-condition on pmOS) and PipeWire-PulseAudio socket refusals; both are
+single-purpose session/setup units, not your network.
 
 ## Upstream follow-ups
 
