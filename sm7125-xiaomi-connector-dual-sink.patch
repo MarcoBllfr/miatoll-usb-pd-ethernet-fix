@@ -1,0 +1,21 @@
+--- a/arch/arm64/boot/dts/qcom/sm7125-xiaomi-common.dtsi
++++ b/arch/arm64/boot/dts/qcom/sm7125-xiaomi-common.dtsi
+@@ -xxx,8 +xxx,12 @@
+ &pm6150_typec {
+ 	connector {
+ 		compatible = "usb-c-connector";
+ 
+-		power-role = "source";
++		power-role = "dual";
+ 		data-role = "dual";
++		try-power-role = "sink";
+ 		self-powered;
+ 
+ 		source-pdos = <PDO_FIXED(5000, 3000, PDO_FIXED_DUAL_ROLE |
+ 				PDO_FIXED_USB_COMM | PDO_FIXED_DATA_SWAP)>;
++		sink-pdos = <PDO_FIXED(5000, 3000, PDO_FIXED_USB_COMM |
++				PDO_FIXED_DATA_SWAP)>;
++		op-sink-microwatt = <15000000>;
+ 
+ 		ports {
+ 			#address-cells = <1>;

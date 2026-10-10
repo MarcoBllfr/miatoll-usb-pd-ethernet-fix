@@ -1,0 +1,27 @@
+ 17:42:36 up 5 min,  0 users,  load average: 0.20, 0.17, 0.09
+--- roles ---
+data_role=[host] device
+power_role=source [sink]
+power_op=usb_power_delivery
+port_type=[dual] source sink
+--- power ---
+tcpm_online=1
+tcpm_voltage_now=5000000
+tcpm_current_now=2000000
+tcpm_current_max=2000000
+tcpm_usb_type=C [PD] PD_PPS
+qg_status=Unknown
+qg_capacity=85
+qg_current_now=-306091
+qg_voltage_now=4238999
+--- net ---
+Bus 001 Device 001: ID 1d6b:0002 Linux 6.14.7-sm7125 xhci-hcd xHCI Host Controller
+Bus 001 Device 002: ID 0bda:8153 Realtek USB 10/100/1000 LAN
+Bus 002 Device 001: ID 1d6b:0003 Linux 6.14.7-sm7125 xhci-hcd xHCI Host Controller
+    link/ether 46:f8:05:a0:61:ad brd ff:ff:ff:ff:ff:ff permaddr 00:e0:4c:3e:4a:80
+    inet 192.168.0.200/24 brd 192.168.0.255 scope global dynamic noprefixroute eth0
+3 packets transmitted, 3 packets received, 0% packet loss
+round-trip min/avg/max = 1.031/1.557/1.857 ms
+--- live dt ---
+dual 
+sink 

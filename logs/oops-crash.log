@@ -1,0 +1,75 @@
+Oct 10 16:52:33 marco-redmi kernel: usb 1-1: new high-speed USB device number 2 using xhci-hcd
+Oct 10 16:52:33 marco-redmi kernel: usb 1-1: New USB device found, idVendor=0bda, idProduct=8153, bcdDevice=31.fd
+Oct 10 16:52:33 marco-redmi kernel: usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=7
+Oct 10 16:52:33 marco-redmi kernel: usb 1-1: Product: USB 10/100/1000 LAN
+Oct 10 16:52:33 marco-redmi kernel: usb 1-1: Manufacturer: Realtek
+Oct 10 16:52:33 marco-redmi kernel: usb 1-1: SerialNumber: DF1300E04C3E4A80
+Oct 10 16:52:33 marco-redmi kernel: r8152-cfgselector 1-1: reset high-speed USB device number 2 using xhci-hcd
+Oct 10 16:52:33 marco-redmi python3[729]: ambient=9.5 lux brightness=279/4095
+Oct 10 16:52:34 marco-redmi kernel: r8152 1-1:1.0 eth0: v1.12.13
+Oct 10 16:52:34 marco-redmi NetworkManager[750]: <info>  [1791643954.0806] manager: (eth0): new Ethernet device (/org/freedesktop/NetworkManager/Devices/6)
+Oct 10 16:52:34 marco-redmi routewrangler[840]: starting sync
+Oct 10 16:52:34 marco-redmi routewrangler[840]: nothing to do...
+Oct 10 16:52:34 marco-redmi NetworkManager[750]: <info>  [1791643954.2288] device (eth0): state change: unmanaged -> unavailable (reason 'managed', managed-type: 'external')
+Oct 10 16:52:34 marco-redmi NetworkManager[750]: <info>  [1791643954.2770] settings: (eth0): created default wired connection 'Wired connection 1'
+Oct 10 16:52:34 marco-redmi routewrangler[840]: starting sync
+Oct 10 16:52:34 marco-redmi routewrangler[840]: nothing to do...
+Oct 10 16:52:34 marco-redmi kernel: Unable to handle kernel paging request at virtual address 007265746e695f62
+Oct 10 16:52:34 marco-redmi kernel: Mem abort info:
+Oct 10 16:52:34 marco-redmi kernel:   ESR = 0x0000000096000004
+Oct 10 16:52:34 marco-redmi kernel:   EC = 0x25: DABT (current EL), IL = 32 bits
+Oct 10 16:52:34 marco-redmi kernel:   SET = 0, FnV = 0
+Oct 10 16:52:34 marco-redmi kernel:   EA = 0, S1PTW = 0
+Oct 10 16:52:34 marco-redmi kernel:   FSC = 0x04: level 0 translation fault
+Oct 10 16:52:34 marco-redmi kernel: Data abort info:
+Oct 10 16:52:34 marco-redmi kernel: xhci-hcd xhci-hcd.1.auto: remove, state 4
+Oct 10 16:52:34 marco-redmi kernel: usb usb2: USB disconnect, device number 1
+Oct 10 16:52:34 marco-redmi kernel:   ISV = 0, ISS = 0x00000004, ISS2 = 0x00000000
+Oct 10 16:52:34 marco-redmi kernel: xhci-hcd xhci-hcd.1.auto: USB bus 2 deregistered
+Oct 10 16:52:34 marco-redmi kernel: xhci-hcd xhci-hcd.1.auto: remove, state 1
+Oct 10 16:52:34 marco-redmi kernel:   CM = 0, WnR = 0, TnD = 0, TagAccess = 0
+Oct 10 16:52:34 marco-redmi kernel: usb usb1: USB disconnect, device number 1
+Oct 10 16:52:34 marco-redmi kernel: r8152-cfgselector 1-1: USB disconnect, device number 2
+Oct 10 16:52:34 marco-redmi kernel:   GCS = 0, Overlay = 0, DirtyBit = 0, Xs = 0
+Oct 10 16:52:34 marco-redmi kernel: r8152 1-1:1.0 eth0: Stop submitting intr, status -108
+Oct 10 16:52:34 marco-redmi kernel: [007265746e695f62] address between user and kernel address ranges
+Oct 10 16:52:34 marco-redmi kernel: Internal error: Oops: 0000000096000004 [#1] PREEMPT SMP
+Oct 10 16:52:34 marco-redmi kernel: Modules linked in: r8153_ecm cdc_ether r8152 typec_displayport exfat q6asm_dai q6afe_clocks q6routing q6afe_dai q6adm q6asm q6afe q6core snd_q6dsp_common venus_dec ov16a1q venus_enc videobuf2_dma_contig s5k5e9 dw9714 rpmsg_ctrl fastrpc rpmsg_char qrtr_smd drv2624 qcom_pd_mapper hci_uart btqca leds_qcom_lpg btbcm qcom_pbs led_class_multicolor qcom_camss bluetooth venus_core aw8695_haptics videobuf2_dma_sg videobuf2_memops v4l2_mem2mem v4l2_fwnode ecdh_generic videobuf2_v4l2 videobuf2_common v4l2_async ecc snd_soc_sm8250 pwrseq_core videodev rtc_pm8xxx snd_soc_qcom_sdw ir_spi rc_core snd_soc_qcom_common mc snd_soc_tas2562 qcom_spmi_temp_alarm nvmem_qcom_spmi_sdam qcom_qg qcom_spmi_adc5 qcom_stats icc_bwmon reset_qcom_pdc i2c_qcom_cci coresight_tmc snd_soc_lpass_tx_macro snd_soc_lpass_rx_macro soundwire_qcom snd_soc_lpass_va_macro snd_soc_lpass_macro_common coresight_replicator coresight_stm stm_core coresight_funnel snd_soc_wcd937x qcom_q6v5_pas snd_soc_wcd_classh qcom_pil_info qcom_q6v5 snd_soc_wcd937x_sdw
+Oct 10 16:52:34 marco-redmi kernel:  coresight ipa regmap_sdw qcom_sysmon snd_soc_wcd_mbhc ath10k_snoc soundwire_bus qcom_wdt qcom_common qcom_glink_smem joydev overlay nft_reject_inet nft_reject nf_reject_ipv6 nf_reject_ipv4 nft_ct nf_conntrack nf_defrag_ipv6 nf_defrag_ipv4 nf_tables nfnetlink zram zsmalloc fuse ipv6 evdev
+Oct 10 16:52:34 marco-redmi kernel: CPU: 6 UID: 0 PID: 3897 Comm: ip Not tainted 6.14.7-sm7125 #3-postmarketos-qcom-sm7125
+Oct 10 16:52:34 marco-redmi kernel: Hardware name: xiaomi  Huaxing)/ Huaxing), BIOS 2025.04-rc1-g682b7641395b 04/01/2025
+Oct 10 16:52:34 marco-redmi kernel: pstate: 80400005 (Nzcv daif +PAN -UAO -TCO -DIT -SSBS BTYPE=--)
+Oct 10 16:52:34 marco-redmi kernel: pc : __pi_strlen+0x14/0x150
+Oct 10 16:52:34 marco-redmi kernel: lr : nla_put_string+0x28/0x58
+Oct 10 16:52:34 marco-redmi python3[729]: ambient=7.7 lux brightness=265/4095
+Oct 10 16:52:35 marco-redmi kernel: sp : ffff80008d2a3560
+Oct 10 16:52:35 marco-redmi kernel: x29: ffff80008d2a3560 x28: ffff000091724800 x27: ffff0000855e8000
+Oct 10 16:52:35 marco-redmi kernel: x26: 0000000000000f39 x25: 0000000000000010 x24: 00000000ffffffff
+Oct 10 16:52:35 marco-redmi kernel: x23: 0000000000000000 x22: ffff800082886c40 x21: ffff000091724800
+Oct 10 16:52:35 marco-redmi kernel: x20: 0000000000000038 x19: 667265746e695f62 x18: 0000000000000000
+Oct 10 16:52:35 marco-redmi kernel: x17: 0000000000000000 x16: 0000000000000000 x15: 0000000000000000
+Oct 10 16:52:35 marco-redmi kernel: x14: 0000000000000000 x13: 0000000000000000 x12: 0000000000000b44
+Oct 10 16:52:35 marco-redmi kernel: x11: 0000000000000ec0 x10: 0000000000000b44 x9 : ffff8000810f4be0
+Oct 10 16:52:35 marco-redmi kernel: x8 : 0101010101010101 x7 : 0000000000000000 x6 : 0000000000000000
+Oct 10 16:52:35 marco-redmi kernel: x5 : ffff000092a25b44 x4 : 0000000000000f62 x3 : 0000000000000000
+Oct 10 16:52:35 marco-redmi kernel: x2 : 667265746e695f62 x1 : 0000000000000038 x0 : 667265746e695f62
+Oct 10 16:52:35 marco-redmi kernel: Call trace:
+Oct 10 16:52:35 marco-redmi kernel:  __pi_strlen+0x14/0x150 (P)
+Oct 10 16:52:35 marco-redmi kernel:  rtnl_fill_ifinfo+0x6d8/0x738
+Oct 10 16:52:35 marco-redmi kernel:  rtnl_dump_ifinfo+0x170/0x5a8
+Oct 10 16:52:35 marco-redmi kernel:  rtnl_dumpit+0x50/0xb8
+Oct 10 16:52:35 marco-redmi kernel:  netlink_dump+0x1a8/0x448
+Oct 10 16:52:35 marco-redmi kernel:  __netlink_dump_start+0x1dc/0x328
+Oct 10 16:52:35 marco-redmi kernel:  rtnetlink_rcv_msg+0x28c/0x328
+Oct 10 16:52:35 marco-redmi kernel:  netlink_rcv_skb+0x128/0x148
+Oct 10 16:52:35 marco-redmi kernel:  rtnetlink_rcv+0x24/0x38
+Oct 10 16:52:35 marco-redmi kernel:  netlink_unicast+0x270/0x420
+Oct 10 16:52:35 marco-redmi kernel:  netlink_sendmsg+0x268/0x358
+Oct 10 16:52:35 marco-redmi kernel:  __sys_sendto+0x138/0x1c8
+Oct 10 16:52:35 marco-redmi kernel:  __arm64_sys_sendto+0x34/0x50
+Oct 10 16:52:35 marco-redmi kernel:  invoke_syscall+0x48/0x100
+Oct 10 16:52:35 marco-redmi kernel:  el0_svc_common+0x88/0xe8
+Oct 10 16:52:35 marco-redmi kernel:  do_el0_svc+0x28/0x40
+Oct 10 16:52:35 marco-redmi kernel:  el0_svc+0x38/0x68
+Oct 10 16:52:35 marco-redmi kernel:  el0t_64_sync_handler+0x78/0x108
+Oct 10 16:52:35 marco-redmi kernel:  el0t_64_sync+0x198/0x1a0

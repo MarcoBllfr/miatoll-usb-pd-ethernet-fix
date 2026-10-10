@@ -1,0 +1,9 @@
+Mar 28 02:49:51 marco-redmi kernel: r8152 1-1:1.0 eth0: v1.12.13
+Oct 10 17:37:06 marco-redmi kernel: r8152 1-1:1.0 eth0: carrier on
+Oct 10 17:39:12 marco-redmi kernel: xhci-hcd xhci-hcd.0.auto: remove, state 4
+Oct 10 17:39:12 marco-redmi kernel: usb usb2: USB disconnect, device number 1
+Oct 10 17:39:12 marco-redmi kernel: xhci-hcd xhci-hcd.0.auto: remove, state 1
+Oct 10 17:39:12 marco-redmi kernel: usb usb1: USB disconnect, device number 1
+Oct 10 17:39:12 marco-redmi kernel: r8152-cfgselector 1-1: USB disconnect, device number 2
+Oct 10 17:39:15 marco-redmi kernel: r8152 1-1:1.0 eth0: v1.12.13
+Oct 10 17:39:17 marco-redmi kernel: r8152 1-1:1.0 eth0: carrier on
