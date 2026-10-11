@@ -13,6 +13,9 @@
 # ------------------------------- config ------------------------------------
 PHONE_SSH="ssh -o BatchMode=yes -o ConnectTimeout=15 -i $HOME/.ssh/redmi user@192.168.0.199"
 PHONE_CAP_FILE="/sys/class/power_supply/qcom_qg/capacity"
+# Set PHONE_SSH to "local" to run this script ON the phone itself
+# (recommended: no SSH round-trip, one less failure mode). The capacity
+# file is then read directly.
 
 # Plug backend: tasmota | shelly1 | shelly2 | command
 PLUG_TYPE="tasmota"
@@ -65,10 +68,18 @@ plug_state() {
 command -v ssh >/dev/null || { echo "ssh required" >&2; exit 1; }
 command -v curl >/dev/null || { echo "curl required" >&2; exit 1; }
 
+read_cap() {
+    if [ "$PHONE_SSH" = "local" ]; then
+        tr -dc '0-9' < "$PHONE_CAP_FILE" 2>/dev/null
+    else
+        $PHONE_SSH "cat $PHONE_CAP_FILE" 2>/dev/null | tr -dc '0-9'
+    fi
+}
+
 log "START high=$HIGH low=$LOW interval=${INTERVAL}s plug=$PLUG_TYPE@$PLUG_HOST"
 fails=0
 while true; do
-    cap=$($PHONE_SSH "cat $PHONE_CAP_FILE" 2>/dev/null | tr -dc '0-9')
+    cap=$(read_cap)
     if [ -z "$cap" ]; then
         fails=$((fails + 1))
         log "WARN unreadable capacity ($fails consecutive)"

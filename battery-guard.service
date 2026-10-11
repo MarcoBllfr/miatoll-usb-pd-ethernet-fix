@@ -1,0 +1,15 @@
+[Unit]
+Description=Battery longevity guard (smart plug hysteresis)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/smart-plug-hysteresis.sh
+Restart=always
+RestartSec=60
+# Runs as root so the log is writable anywhere; restrict if you prefer.
+# The script itself only reads sysfs and curls the plug on the LAN.
+
+[Install]
+WantedBy=multi-user.target
