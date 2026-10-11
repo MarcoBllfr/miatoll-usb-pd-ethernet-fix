@@ -205,6 +205,30 @@ panel height (6 of 8 rows). Caution when editing over SSH: this tooling
 chain mangles single-quote characters in heredocs — transfer patch scripts
 base64-encoded or write them with double quotes only.
 
+## Battery longevity: no kernel charge control, smart plug instead
+
+A 24/7-plugged Li-Po pinned at 100% and warm will pillow within months.
+Checked on this port: there is **no software charge control at all** —
+no `/sys/class/power_supply/battery`, no `charge_control_*` /
+`input_suspend` anywhere in sysfs, `CONFIG_CHARGER_MANAGER` off, no
+QCOM/SMB charger driver compiled, and every `tcpm` attribute is
+read-only. The kernel sees the battery as a sensor only
+(`qcom_qg` gauge: capacity/voltage/current/temperature). Observed state
+while floating at full: 99%, 4.38V against a 4.40V design max, 0µA,
+~31°C, health still ~100% — healthy today, exactly the recipe for
+swelling in a few months.
+
+So capping at 70–80% must happen outside the phone:
+[`smart-plug-hysteresis.sh`](smart-plug-hysteresis.sh) polls capacity
+over SSH and switches the *charger's* smart plug with hysteresis
+(defaults: OFF at ≥80%, ON at ≤65%, 5-minute polls), with a watchdog
+that forces the plug back ON after 6 consecutive unreadable polls (a
+dead script with the plug off would eventually kill the server).
+Backends included: Tasmota, Shelly Gen1/Gen2 RPC, or custom commands.
+Complementary and free: no case, vertical, ventilated spot; sustained
+38–40°C+ is the real urgency threshold. Track `charge_full` vs
+`charge_full_design` — below ~90% means replace before it pillows.
+
 ## Upstream follow-ups
 
 1. Send the DTS patch to `sm7125-mainline/linux` (+ pmaports) so it survives
